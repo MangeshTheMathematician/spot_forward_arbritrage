@@ -102,11 +102,12 @@ with col3:
         'P&L Gap': [vals_bet[i] - vals_s1[i] for i in range(T)]
     })
     
+    # FIXED CODE HERE: Swapped .applymap() for .map() to support modern Pandas
     st.dataframe(df2.style.format({
         'Baseline Value': '${:,.0f}',
         'Your Bet Value': '${:,.0f}',
         'P&L Gap': '${:,.0f}'
-    }).applymap(lambda x: 'color: green' if x > 0 else ('color: red' if x < 0 else ''), subset=['P&L Gap']), 
+    }).map(lambda x: 'color: green' if x > 0 else ('color: red' if x < 0 else ''), subset=['P&L Gap']), 
     hide_index=True, use_container_width=True)
 
 with col4:
