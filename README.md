@@ -10,7 +10,43 @@ Finance textbooks are notorious for taking simple concepts and dressing them up 
 
 It is an interactive tool for understanding yield curve logic, fixed-income analytics, derivatives foundations, and treasury decision-making.
 
-2. The Concept in Plain English
+2. Technical Stack
+
+Frontend / App Framework: Streamlit
+
+Numerical Computing: NumPy
+
+Data Manipulation: Pandas
+
+Data Visualization: Plotly Graph Objects & Subplots
+
+3. How to Run Locally
+
+To run this dashboard on your local machine, follow these steps:
+
+Clone the repository:
+
+git clone [https://github.com/MangeshTheMathematician/spot_forward_arbritrage.git](https://github.com/MangeshTheMathematician/spot_forward_arbritrage.git)
+
+
+Navigate to the folder:
+
+cd spot_forward_arbritrage
+
+
+Install the required dependencies:
+
+pip install -r requirements.txt
+
+
+Run the Streamlit app:
+
+streamlit run spot_forward_chain_app.py
+
+
+(Note: You can view the live deployment of this dashboard here: https://hessian-ai-spot-forward-chain-arbitrage.streamlit.app/)
+
+4. The Concept in Plain English
 
 Imagine you have $100,000 and you want to invest it for 5 years. You have a choice of different paths.
 
@@ -27,11 +63,9 @@ What it means: You only lock your money in for 1 year at 5% ($S_1 = 5\%$).
 The Reality: You sacrifice the guaranteed 6% because maybe you think rates will go up next year, and you don't want to be trapped in a 5-year contract.
 
 The Forward Rate: The "Breakeven" ($F_{1,5} = 6.25\%$)
-
 Because you only got 5% in year one, you are behind the Safe Route. To catch up over the remaining 4 years, you need a higher rate. The Forward Rate (6.25%) is the exact mathematical rate you need to hit over the next 4 years just to break even with the Safe Route. It's a theoretical target.
 
 The Realized Rate: What Actually Happens (e.g., $7\%$)
-
 "Realized" is just the finance word for "what actually happened in real life." Once your 1-year contract ends, your money unlocks. You look at the bank's board and see they are offering 7%. You lock it in. Because your Realized Rate (7%) is higher than your Breakeven target (6.25%), your gamble paid off! You beat the baseline.
 
 Path 3: The "Commitment-Phobe" Route (Yearly Chain Path)
@@ -40,7 +74,7 @@ What it means: You refuse to sign any long-term contract. You only do 1-year dea
 
 The Reality: Year 1 ends, you check the new rate, sign for 1 year. Year 2 ends, you check the new rate, sign for 1 year. You do this 5 times in a row, riding the rollercoaster of whatever the 1-year rate happens to be each year.
 
-3. What is "No-Arbitrage"?
+5. What is "No-Arbitrage"?
 
 Arbitrage means ZERO risk, ZERO guessing, and ZERO of your own money. It means locking in a guaranteed profit today.
 
@@ -50,7 +84,7 @@ In real markets, no retail bank makes this mistake. But in the chaotic, trillion
 
 The "No-Arbitrage Formula" calculates the exact theoretical rate where no free money exists, because if it did, the market would exploit it until it vanished.
 
-4. The Formal Math & Proofs
+6. The Formal Math & Proofs
 
 Formula 1: Direct Spot Investment (Baseline)
 
@@ -98,7 +132,7 @@ CAGR is an imaginary, perfectly smooth interest rate. It cuts through the chaos 
 
 $$CAGR = \left(\frac{FV}{P}\right)^{\frac{1}{T}} - 1$$
 
-5. Step-by-Step Example (From the Dashboard)
+7. Step-by-Step Example (From the Dashboard)
 
 Inputs:
 
@@ -116,7 +150,7 @@ Yearly Chain rates $= 5\%, 5.5\%, 6\%, 6.5\%, 7\%$
 
 Step 1: Baseline 5-Year Spot
 
-$$FV_{spot} = 100,000(1.06)^5 = \$133,822.56$$
+$$FV_{spot} = 100,000(1.06)^5 = 133,822.56$$
 
 Step 2: Calculate Implied Forward Rate
 
@@ -126,21 +160,21 @@ $$F_{1,5} = \left(\frac{(1.06)^5}{1.05}\right)^{\frac{1}{4}} - 1 = 6.25\%$$
 
 Step 3: Realized Split Strategy (7%)
 
-$$FV_{split} = 100,000(1.05)(1.07)^4 = \$137,633.58$$
+$$FV_{split} = 100,000(1.05)(1.07)^4 = 137,633.58$$
 
-$$PnL = 137,633.58 - 133,822.56 = \mathbf{+\$3,811.02}$$
+$$PnL = 137,633.58 - 133,822.56 = +3,811.02$$
 
 (Because 7% > 6.25%, you won the gamble).
 
 Step 4: Yearly Chain Path
 
-$$FV_{chain} = 100,000(1.05)(1.055)(1.06)(1.065)(1.07) = \$133,807.67$$
+$$FV_{chain} = 100,000(1.05)(1.055)(1.06)(1.065)(1.07) = 133,807.67$$
 
-$$PnL = 133,807.67 - 133,822.56 = \mathbf{-\$14.89}$$
+$$PnL = 133,807.67 - 133,822.56 = -14.89$$
 
 (The chain path slightly underperformed the safe 6% baseline).
 
-6. Dashboard Features
+8. Dashboard Features
 
 Dynamic Inputs: Adjust Principal, Time horizons, and expected rates.
 
